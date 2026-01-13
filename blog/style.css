@@ -1,227 +1,248 @@
-/* =========================================
-   1. IMPORT DE LA POLICE & RESET GLOBAL
-   ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+/* ================================================================
+   FEUILLE DE STYLE CSS - BLOG TECH MODERNE
+   Design : Minimaliste, Blanc cassé, Haute lisibilité
+   Police : Inter
+   ================================================================
+*/
 
-* {
+/* 1. IMPORT & RESET */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*, ::after, ::before {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: #f5f5f7; /* Blanc cassé style Apple */
-    color: #1d1d1f; /* Noir doux pour le texte */
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased; /* Rendu de police plus net */
+:root {
+    --bg-color: #f7f7f7;       /* Blanc cassé */
+    --surface-color: #ffffff;  /* Blanc pur pour les cartes */
+    --text-main: #1a1a1a;      /* Noir charbon pour le texte */
+    --text-muted: #666666;     /* Gris pour les infos secondaires */
+    --accent-color: #000000;   /* Couleur d'accent (Noir pur) */
+    --border-color: #e5e5e5;   /* Bordures subtiles */
+    --radius-lg: 24px;         /* Arrondis pour les cartes */
+    --radius-sm: 8px;          /* Arrondis pour images/petits éléments */
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-main);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 2. STRUCTURE GÉNÉRIQUE */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section {
+    padding: 60px 0;
+}
+
+/* 3. NAVIGATION (Sobriété & Élégance) */
+.navbar {
+    background: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 10px 0;
+    position: relative;
+    transition: var(--transition);
+}
+
+/* Hover subtil sans arrondi pour le menu */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* 4. TYPOGRAPHIE */
+h1, h2, h3, h4 {
+    color: var(--accent-color);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+h1 { font-size: 2.5rem; } /* Titre article */
+h2 { font-size: 1.8rem; margin-top: 2rem; } /* Sous-titre section */
+h3 { font-size: 1.4rem; }
 
 a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.2s ease;
+    color: var(--text-main);
+    transition: var(--transition);
 }
 
-img {
-    max-width: 100%;
-    display: block;
-    border-radius: 18px; /* Contours ronds sur toutes les images */
-}
-
-/* =========================================
-   2. EN-TÊTE (HEADER) COMMUN
-   ========================================= */
-header {
-    text-align: center;
-    padding: 60px 20px;
-    max-width: 980px;
-    margin: 0 auto;
-}
-
-nav a {
-    font-size: 14px;
-    font-weight: 500;
-    color: #86868b;
-}
-
-nav a:hover {
-    color: #0071e3; /* Bleu Apple */
-}
-
-.hero h1, .category-header h1 {
-    font-size: 48px;
-    font-weight: 700;
-    margin-top: 16px;
-    letter-spacing: -0.02em; /* Crénage serré style titres Apple */
-}
-
-.hero p, .category-header p {
-    font-size: 20px;
-    color: #86868b;
-    margin-top: 10px;
-    font-weight: 400;
-}
-
-/* =========================================
-   3. GRILLE DES CATÉGORIES (HOME BLOG)
-   ========================================= */
-main {
-    max-width: 1200px; /* Largeur maximale pour que les 4 colonnes respirent */
-    margin: 0 auto;
-    padding: 0 20px 80px 20px;
-}
-
-.categories-grid {
-    display: grid;
-    /* La demande : 4 colonnes (pour faire 2 lignes avec 8 items) */
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 30px; /* Espace entre les cartes */
-    margin-top: 40px;
-}
-
-.category-card {
-    background: #ffffff;
-    border-radius: 24px; /* Coins très arrondis */
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* Ombre très douce et diffuse */
-    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-.category-card:hover {
-    transform: scale(1.03); /* Léger zoom au survol */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* Style de l'icône/image dans la carte */
-.category-card .icon {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 20px;
-    /* Si tu utilises des balises <img> à l'intérieur : */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.category-card .icon img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-}
-
-.category-card h2 {
-    font-size: 21px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.category-card p {
-    font-size: 14px;
-    color: #86868b;
-    line-height: 1.4;
-}
-
-/* =========================================
-   4. PAGES ARTICLES (SOUS-DOSSIERS)
-   ========================================= */
-
-/* Conteneur plus étroit pour la lecture (meilleure ergonomie) */
-.articles-container {
-    max-width: 800px; 
-    margin: 0 auto;
-    display: block; /* Pas de grille ici, c'est une liste verticale */
-}
-
-.blog-post {
-    background: #ffffff;
-    border-radius: 24px;
+/* 5. CARTES ET BLOCS (.card) */
+.card {
+    background: var(--surface-color);
+    border-radius: var(--radius-lg);
     padding: 40px;
-    margin-bottom: 60px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.03);
-}
-
-.post-image img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover; /* Recadre l'image proprement sans déformer */
-    border-radius: 18px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
     margin-bottom: 30px;
+    transition: var(--transition);
 }
 
-.post-content .date {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #86868b;
-    font-weight: 600;
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* 6. ARTICLES (Contenu spécifique) */
+.article-content {
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article-content p {
+    margin-bottom: 1.8rem;
+}
+
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    margin: 2rem 0;
     display: block;
-    margin-bottom: 10px;
 }
 
-.post-content h2 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    line-height: 1.2;
+/* Citations stylisées */
+blockquote {
+    border-left: 4px solid var(--accent-color);
+    padding: 20px 30px;
+    margin: 30px 0;
+    background: var(--bg-color);
+    font-style: italic;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
-.post-content p {
-    font-size: 17px;
-    color: #333;
-    margin-bottom: 25px;
+/* Listes */
+.article-content ul, .article-content ol {
+    margin-bottom: 1.8rem;
+    padding-left: 20px;
 }
 
-.read-more {
-    display: inline-block;
-    color: #0071e3;
+/* 7. BOUTONS (Modernes et Arrondis) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border-radius: 99px; /* Toujours arrondi */
     font-weight: 600;
     font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
 }
 
-.read-more:hover {
-    text-decoration: underline;
+.btn-primary {
+    background-color: var(--accent-color);
+    color: #fff !important;
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background: #e5e5e5;
-    margin: 60px 0;
-    display: none; /* Caché car j'ai mis des marges sur .blog-post */
+.btn-primary:hover {
+    background-color: #333;
+    transform: scale(1.03);
 }
 
-footer {
-    text-align: center;
-    padding: 40px;
-    color: #86868b;
-    font-size: 12px;
-    border-top: 1px solid #e5e5e5;
-    margin-top: 40px;
+.btn-secondary {
+    background-color: transparent;
+    border-color: var(--border-color);
+    color: var(--text-main);
 }
 
-/* =========================================
-   5. RESPONSIVE (MOBILE)
-   ========================================= */
-@media (max-width: 900px) {
-    /* Sur tablette/mobile, on passe de 4 colonnes à 2 ou 1 */
-    .categories-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.btn-secondary:hover {
+    background-color: #eee;
+    border-color: var(--text-main);
 }
 
-@media (max-width: 600px) {
-    .categories-grid {
-        grid-template-columns: 1fr; /* 1 colonne sur mobile */
+/* 8. GRILLES (Pour l'accueil ou catégories) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* 9. UTILS */
+.text-muted { color: var(--text-muted); font-size: 0.9rem; }
+.mb-20 { margin-bottom: 20px; }
+.mt-40 { margin-top: 40px; }
+.text-center { text-align: center; }
+
+/* 10. RESPONSIVE */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    .section { padding: 40px 0; }
+    .card { padding: 25px; }
+    
+    .nav-container {
+        gap: 15px;
+        flex-wrap: wrap;
     }
     
-    .hero h1 { font-size: 32px; }
-    .blog-post { padding: 25px; }
-    .post-image img { height: 200px; }
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Styles spécifiques pour le code (Blog Tech) */
+pre, code {
+    background: #f1f1f1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+}
+
+pre {
+    padding: 20px;
+    overflow-x: auto;
+    margin-bottom: 1.8rem;
+    border: 1px solid var(--border-color);
 }
