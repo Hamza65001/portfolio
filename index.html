@@ -34,6 +34,47 @@
         font-size: 16px;
     }
 
+   /* Style pour la barre de navigation */
+nav {
+    padding: 20px;
+    background-color: #f9f9f9; /* Rappel du blanc cassé */
+}
+
+nav a {
+    text-decoration: none;
+    color: #1a1a1a; /* Contraste élevé */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 99px; /* Forme pilule pour le survol */
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Effet de survol (Hover) */
+nav a:hover {
+    background-color: #ffffff; /* La pastille devient blanche */
+    color: #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Ombre très légère */
+}
+
+/* Optionnel : Indicateur discret sous le lien actif/survolé */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 4px;
+    left: 50%;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+nav a:hover::after {
+    width: 20px; /* Petite ligne élégante qui s'étire au survol */
+}
     /* Layout */
     .section-container {
         max-width: 1024px;
